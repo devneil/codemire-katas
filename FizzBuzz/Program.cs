@@ -64,6 +64,16 @@ namespace FizzBuzz
             configs[0].Divisor.Should().Be(1);
             configs[0].PrintString.Should().Be("two");
         }
+        
+        [Test]
+        public void CanCreateTwoConfigs()
+        {
+            FizzBuzzConfig[] configs = new ArgConvertor(new[] {"1", "two", "3", "four"}).GetConfigs();
+            configs[0].Divisor.Should().Be(1);
+            configs[0].PrintString.Should().Be("two");
+            configs[1].Divisor.Should().Be(3);
+            configs[1].PrintString.Should().Be("four");
+        }
 
     }
 
@@ -107,7 +117,14 @@ namespace FizzBuzz
 
         public FizzBuzzConfig[] GetConfigs()
         {
-            return new[] {new FizzBuzzConfig(int.Parse(_args[0]), _args[1])};
+            var configs = new List<FizzBuzzConfig>();
+
+            for (int i = 0; i < _args.Length; i = i + 2)
+            {
+                configs.Add( new FizzBuzzConfig(int.Parse(_args[i]), _args[i+1]));
+            }
+
+            return configs.ToArray();
         }
     }
     
