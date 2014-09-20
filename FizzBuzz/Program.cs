@@ -30,6 +30,10 @@ namespace FizzBuzz
             Test(4, "4");
             Test(5, "Buzz");
             Test(6, "Fizz");
+            Test(7, "7");
+            Test(8, "8");
+            Test(9, "Fizz");
+            Test(10, "Buzz");
         }
 
         private void Test(int input, string expected)
@@ -48,7 +52,7 @@ namespace FizzBuzz
             {
                 return "Fizz";
             }
-            if (input == 5)
+            if (input%5 == 0)
             {
                 return "Buzz";
             }
