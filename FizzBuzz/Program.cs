@@ -20,7 +20,9 @@ namespace FizzBuzz
         [SetUp]
         public void Setup()
         {
-            _fizzBuzz = new FizzBuzz();
+            FizzBuzzConfig fbc1 = new FizzBuzzConfig(3, "Fizz");
+            FizzBuzzConfig fbc2 = new FizzBuzzConfig(5, "Buzz");
+            _fizzBuzz = new FizzBuzz(new [] { fbc1, fbc2 });
         }
         [Test]
         public void StateTesting()
@@ -40,6 +42,7 @@ namespace FizzBuzz
             Test(13, "13");
             Test(14, "14");
             Test(15, "FizzBuzz");
+            Test(30, "FizzBuzz");
         }
 
         private void Test(int input, string expected)
@@ -50,18 +53,36 @@ namespace FizzBuzz
 
     }
 
+    public class FizzBuzzConfig
+    {
+        public FizzBuzzConfig(int divisor, string printString)
+        {
+            Divisor = divisor;
+            PrintString = printString;
+        }
+
+        public int Divisor { get; private set; }
+        public string PrintString { get; private set; }
+    }
+
     public class FizzBuzz
     {
+        private readonly FizzBuzzConfig[] _fizzBuzzConfigs;
+
+        public FizzBuzz(FizzBuzzConfig[] fizzBuzzConfigs)
+        {
+            _fizzBuzzConfigs = fizzBuzzConfigs;
+        }
+
         public string GetOutputString(int input)
         {
-            StringBuilder result = new StringBuilder();
-            if (input%3 == 0)
+            var result = new StringBuilder();
+            foreach (var fbc in _fizzBuzzConfigs)
             {
-                result.Append("Fizz");
-            }
-            if (input%5 == 0)
-            {
-                result.Append("Buzz");
+                if (input%fbc.Divisor == 0)
+                {
+                    result.Append(fbc.PrintString);
+                }
             }
             if (result.Length == 0)
             {
