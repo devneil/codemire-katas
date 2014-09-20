@@ -39,7 +39,7 @@ namespace FizzBuzz
     {
         public string GetOutputString(int input)
         {
-            return input.ToString();
+            return input.ToString(CultureInfo.InvariantCulture);
         }
     }
 }
