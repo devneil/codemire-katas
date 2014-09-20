@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -56,13 +57,24 @@ namespace FizzBuzz
             new ArgConvertor(new[] {"1", "2", "three", "4"});
         }
 
+        [Test]
+        public void CanCreateConfig()
+        {
+            FizzBuzzConfig[] configs = new ArgConvertor(new[] {"1", "two"}).GetConfigs();
+            configs[0].Divisor.Should().Be(1);
+            configs[0].PrintString.Should().Be("two");
+        }
+
     }
 
     public class ArgConvertor
     {
+        private readonly string[] _args;
+
         public ArgConvertor(string[] args)
         {
             Validate(args);
+            _args = args;
         }
 
         private static void Validate(string[] args)
@@ -71,9 +83,9 @@ namespace FizzBuzz
             ValidateOddArgumentsAreInts(args);
         }
 
-        private static void ValidateOddArgumentsAreInts(string[] args)
+        private static void ValidateOddArgumentsAreInts(IList<string> args)
         {
-            for (int i = 0; i < args.Length; i = i + 2)
+            for (int i = 0; i < args.Count; i = i + 2)
             {
                 int dummy;
                 if (!int.TryParse(args[i], out dummy))
@@ -91,6 +103,11 @@ namespace FizzBuzz
                     "Argument count is uneven.  Arguments should be in divisor string pairs.");
             }
 
+        }
+
+        public FizzBuzzConfig[] GetConfigs()
+        {
+            return new[] {new FizzBuzzConfig(int.Parse(_args[0]), _args[1])};
         }
     }
     
