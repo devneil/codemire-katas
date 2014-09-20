@@ -1,4 +1,5 @@
 ﻿using System;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace FizzBuzz
@@ -22,9 +23,19 @@ namespace FizzBuzz
     public class ArgConvertorTest
     {
         [Test]
-        public void CanRun()
+        [ExpectedException(typeof(ArgumentException))]
+        public void SingleArgsShouldThrow()
         {
-            
+            new ArgConvertor("1");
+
+        }
+    }
+
+    public class ArgConvertor
+    {
+        public ArgConvertor(string arg)
+        {
+            throw new ArgumentException();
         }
     }
 }
