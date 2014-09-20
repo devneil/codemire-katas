@@ -24,9 +24,10 @@ namespace FizzBuzz
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void SingleArgsShouldThrow()
+        public void OddArgsShouldThrow()
         {
             new ArgConvertor(new[] {"1"});
+            new ArgConvertor(new[] { "1", "2", "3" });
         }
 
         [Test]
@@ -35,12 +36,6 @@ namespace FizzBuzz
             new ArgConvertor(new[] {"1", "2"});
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void ThreeArgsShouldThrow()
-        {
-            new ArgConvertor(new[] {"1", "2", "3"});
-        }
     }
 
     public class ArgConvertor
