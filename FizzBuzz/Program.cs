@@ -1,4 +1,5 @@
 ﻿using System;
+using NUnit.Framework;
 
 namespace FizzBuzz
 {
@@ -14,6 +15,16 @@ namespace FizzBuzz
                 Console.WriteLine(fb.GetOutputString(i));
             }
             Console.ReadLine();
+        }
+    }
+
+    [TestFixture]
+    public class ArgConvertorTest
+    {
+        [Test]
+        public void CanRun()
+        {
+            
         }
     }
 }
