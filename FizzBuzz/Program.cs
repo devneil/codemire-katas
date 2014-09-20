@@ -62,7 +62,17 @@ namespace FizzBuzz
     {
         public ArgConvertor(string[] args)
         {
+            Validate(args);
+        }
+
+        private static void Validate(string[] args)
+        {
             ValidateEvenArgumentsCount(args);
+            ValidateOddArgumentsAreInts(args);
+        }
+
+        private static void ValidateOddArgumentsAreInts(string[] args)
+        {
             for (int i = 0; i < args.Length; i = i + 2)
             {
                 int dummy;
