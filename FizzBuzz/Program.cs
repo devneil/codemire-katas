@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Globalization;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -27,18 +22,18 @@ namespace FizzBuzz
             _fizzBuzz = new FizzBuzz();
         }
         [Test]
-        public void OneReturnsOne()
+        public void StateTesting()
         {
-            string result = _fizzBuzz.GetOutputString(1);
-            result.Should().Be("1");
+            Test(1, "1");
+            Test(2, "2");
         }
 
-        [Test]
-        public void TwoReturnsTwo()
+        private void Test(int input, string expected)
         {
-            string result = _fizzBuzz.GetOutputString(2);
-            result.Should().Be("2");
+            var result = _fizzBuzz.GetOutputString(input);
+            result.Should().Be(expected);
         }
+
     }
 
     public class FizzBuzz
