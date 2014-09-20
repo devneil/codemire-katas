@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -53,20 +54,20 @@ namespace FizzBuzz
     {
         public string GetOutputString(int input)
         {
-            string result = string.Empty;
+            StringBuilder result = new StringBuilder();
             if (input%3 == 0)
             {
-                result += "Fizz";
+                result.Append("Fizz");
             }
             if (input%5 == 0)
             {
-                result += "Buzz";
+                result.Append("Buzz");
             }
             if (result.Length == 0)
             {
-                result = input.ToString(CultureInfo.InvariantCulture);
+                result.Append(input.ToString(CultureInfo.InvariantCulture));
             }
-            return result;
+            return result.ToString();
         }
     }
 }
