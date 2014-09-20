@@ -34,13 +34,20 @@ namespace FizzBuzz
         {
             new ArgConvertor(new[] {"1", "2"});
         }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ThreeArgsShouldThrow()
+        {
+            new ArgConvertor(new[] {"1", "2", "3"});
+        }
     }
 
     public class ArgConvertor
     {
         public ArgConvertor(string[] args)
         {
-            if (args.Length == 1)
+            if (args.Length%2 != 0)
             {
                 throw new ArgumentException();
             }
