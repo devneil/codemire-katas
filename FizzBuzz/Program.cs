@@ -26,6 +26,7 @@ namespace FizzBuzz
         {
             Test(1, "1");
             Test(2, "2");
+            Test(3, "Fizz");
         }
 
         private void Test(int input, string expected)
@@ -40,6 +41,10 @@ namespace FizzBuzz
     {
         public string GetOutputString(int input)
         {
+            if (input == 3)
+            {
+                return "Fizz";
+            }
             return input.ToString(CultureInfo.InvariantCulture);
         }
     }
