@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,13 +26,20 @@ namespace FizzBuzz
 
             result.Should().Be("1");
         }
+
+        [Test]
+        public void TwoReturnsTwo()
+        {
+            string result = new FizzBuzz().GetOutputString(2);
+            result.Should().Be("2");
+        }
     }
 
     public class FizzBuzz
     {
         public string GetOutputString(int input)
         {
-            return "1";
+            return input.ToString();
         }
     }
 }
