@@ -26,16 +26,25 @@ namespace FizzBuzz
         [ExpectedException(typeof(ArgumentException))]
         public void SingleArgsShouldThrow()
         {
-            new ArgConvertor("1");
+            new ArgConvertor(new[] {"1"});
+        }
 
+        [Test]
+        public void TwoArgsShouldBeValid()
+        {
+            new ArgConvertor(new[] {"1", "2"});
         }
     }
 
     public class ArgConvertor
     {
-        public ArgConvertor(string arg)
+        public ArgConvertor(string[] args)
         {
-            throw new ArgumentException();
+            if (args.Length == 1)
+            {
+                throw new ArgumentException();
+            }
         }
     }
+    
 }
