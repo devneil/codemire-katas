@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArgConvertor.cs" />
+    <Compile Include="ArgConvertorTest.cs" />
     <Compile Include="FizzBuzz.cs" />
     <Compile Include="FizzBuzzConfig.cs" />
     <Compile Include="FizzBuzzTest.cs" />
