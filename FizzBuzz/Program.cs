@@ -24,7 +24,7 @@ namespace FizzBuzz
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void OddArgsShouldThrow()
+        public void OddArgsCountShouldThrow()
         {
             new ArgConvertor(new[] {"1"});
             new ArgConvertor(new[] { "1", "2", "3" });
@@ -36,15 +36,31 @@ namespace FizzBuzz
             new ArgConvertor(new[] {"1", "2"});
         }
 
+        [Test]
+        [ExpectedException(typeof (ArgumentException))]
+        public void OddArgsNonIntShoudThrow()
+        {
+            new ArgConvertor(new[] {"one", "2"});
+        }
     }
 
     public class ArgConvertor
     {
         public ArgConvertor(string[] args)
         {
+            ValidateEvenArgumentsCount(args);
+            int dummy;
+            if (!int.TryParse(args[0], out dummy))
+            {
+                throw new ArgumentException("Odd arguments must be integers to be used as divisors.");
+            }
+        }
+
+        private static void ValidateEvenArgumentsCount(string[] args)
+        {
             if (args.Length%2 != 0)
             {
-                throw new ArgumentException();
+                throw new ArgumentException("Argument count is uneven.  Arguments should be in divisor string pairs.");
             }
         }
     }
