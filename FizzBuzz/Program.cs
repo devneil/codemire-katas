@@ -34,6 +34,11 @@ namespace FizzBuzz
             Test(8, "8");
             Test(9, "Fizz");
             Test(10, "Buzz");
+            Test(11, "11");
+            Test(12, "Fizz");
+            Test(13, "13");
+            Test(14, "14");
+            Test(15, "FizzBuzz");
         }
 
         private void Test(int input, string expected)
@@ -48,15 +53,20 @@ namespace FizzBuzz
     {
         public string GetOutputString(int input)
         {
+            string result = string.Empty;
             if (input%3 == 0)
             {
-                return "Fizz";
+                result += "Fizz";
             }
             if (input%5 == 0)
             {
-                return "Buzz";
+                result += "Buzz";
             }
-            return input.ToString(CultureInfo.InvariantCulture);
+            if (result.Length == 0)
+            {
+                result = input.ToString(CultureInfo.InvariantCulture);
+            }
+            return result;
         }
     }
 }
