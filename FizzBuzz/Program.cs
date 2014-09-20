@@ -24,9 +24,15 @@ namespace FizzBuzz
     {
         [Test]
         [ExpectedException(typeof(ArgumentException))]
-        public void OddArgsCountShouldThrow()
+        public void SingleArgsCountShouldThrow()
         {
             new ArgConvertor(new[] {"1"});
+        }
+        
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void OddArgsCountShouldThrow(){
+            
             new ArgConvertor(new[] { "1", "2", "3" });
         }
 
@@ -38,10 +44,18 @@ namespace FizzBuzz
 
         [Test]
         [ExpectedException(typeof (ArgumentException))]
-        public void OddArgsNonIntShoudThrow()
+        public void SingleArgsNonIntShoudThrow()
         {
             new ArgConvertor(new[] {"one", "2"});
         }
+
+        [Test]
+        [ExpectedException(typeof (ArgumentException))]
+        public void OddArgsNonIntShoudThrow()
+        {
+            new ArgConvertor(new[] {"1", "2", "three", "4"});
+        }
+
     }
 
     public class ArgConvertor
@@ -49,10 +63,13 @@ namespace FizzBuzz
         public ArgConvertor(string[] args)
         {
             ValidateEvenArgumentsCount(args);
-            int dummy;
-            if (!int.TryParse(args[0], out dummy))
+            for (int i = 0; i < args.Length; i = i + 2)
             {
-                throw new ArgumentException("Odd arguments must be integers to be used as divisors.");
+                int dummy;
+                if (!int.TryParse(args[i], out dummy))
+                {
+                    throw new ArgumentException("Odd arguments must be integers to be used as divisors.");
+                }
             }
         }
 
@@ -60,8 +77,10 @@ namespace FizzBuzz
         {
             if (args.Length%2 != 0)
             {
-                throw new ArgumentException("Argument count is uneven.  Arguments should be in divisor string pairs.");
+                throw new ArgumentException(
+                    "Argument count is uneven.  Arguments should be in divisor string pairs.");
             }
+
         }
     }
     
