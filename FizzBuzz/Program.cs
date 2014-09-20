@@ -19,18 +19,24 @@ namespace FizzBuzz
     [TestFixture]
     public class FizzBuzzTest
     {
+        FizzBuzz _fizzBuzz;
+
+        [SetUp]
+        public void Setup()
+        {
+            _fizzBuzz = new FizzBuzz();
+        }
         [Test]
         public void OneReturnsOne()
         {
-            string result = new FizzBuzz().GetOutputString(1);
-
+            string result = _fizzBuzz.GetOutputString(1);
             result.Should().Be("1");
         }
 
         [Test]
         public void TwoReturnsTwo()
         {
-            string result = new FizzBuzz().GetOutputString(2);
+            string result = _fizzBuzz.GetOutputString(2);
             result.Should().Be("2");
         }
     }
