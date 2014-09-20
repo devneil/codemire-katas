@@ -61,20 +61,22 @@ namespace FizzBuzz
         public void CanCreateConfig()
         {
             FizzBuzzConfig[] configs = new ArgConvertor(new[] {"1", "two"}).GetConfigs();
-            configs[0].Divisor.Should().Be(1);
-            configs[0].PrintString.Should().Be("two");
+            AssertConfig(configs[0], 1, "two");
         }
         
         [Test]
         public void CanCreateTwoConfigs()
         {
             FizzBuzzConfig[] configs = new ArgConvertor(new[] {"1", "two", "3", "four"}).GetConfigs();
-            configs[0].Divisor.Should().Be(1);
-            configs[0].PrintString.Should().Be("two");
-            configs[1].Divisor.Should().Be(3);
-            configs[1].PrintString.Should().Be("four");
+            AssertConfig(configs[0], 1, "two");
+            AssertConfig(configs[1], 3, "four");
         }
 
+        private static void AssertConfig(FizzBuzzConfig fizzBuzzConfig, int expectedDiv, string expectedString)
+        {
+            fizzBuzzConfig.Divisor.Should().Be(expectedDiv);
+            fizzBuzzConfig.PrintString.Should().Be(expectedString);
+        }
     }
 
     public class ArgConvertor
