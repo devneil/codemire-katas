@@ -72,6 +72,14 @@ namespace FizzBuzz
             AssertConfig(configs[1], 3, "four");
         }
 
+        [Test]
+        public void NullArgsCreatesDefaultConfigs()
+        {
+            FizzBuzzConfig[] configs = new ArgConvertor(null).GetConfigs();
+            AssertConfig(configs[0], 3, "Fizz");
+            AssertConfig(configs[1], 5, "Buzz");
+        }
+
         private static void AssertConfig(FizzBuzzConfig fizzBuzzConfig, int expectedDiv, string expectedString)
         {
             fizzBuzzConfig.Divisor.Should().Be(expectedDiv);
@@ -85,14 +93,22 @@ namespace FizzBuzz
 
         public ArgConvertor(string[] args)
         {
-            Validate(args);
-            _args = args;
+            if (args == null)
+            {
+                _args = new[] {"3", "Fizz", "5", "Buzz"};
+            }
+            else
+            {
+                Validate(args);
+                _args = args;
+            }
         }
 
         private static void Validate(string[] args)
         {
             ValidateEvenArgumentsCount(args);
             ValidateOddArgumentsAreInts(args);
+
         }
 
         private static void ValidateOddArgumentsAreInts(IList<string> args)
