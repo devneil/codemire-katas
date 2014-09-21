@@ -1,4 +1,6 @@
-﻿namespace SumOfMultiples
+﻿using NUnit.Framework;
+
+namespace SumOfMultiples
 {
     class Program
     {
@@ -11,6 +13,16 @@
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+        }
+    }
+
+    [TestFixture]
+    public class SumMultiplesTest
+    {
+        [Test]
+        public void CanTest()
+        {
+            
         }
     }
 }
