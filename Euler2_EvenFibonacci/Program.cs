@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
-using NUnit.Framework;
 
 namespace Euler2_EvenFibonacci
 {
@@ -19,42 +15,6 @@ namespace Euler2_EvenFibonacci
     {
         static void Main(string[] args)
         {
-        }
-    }
-
-    [TestFixture]
-    public class FibonacciGeneratorTest
-    {
-        [Test]
-        public void StateTests()
-        {
-            TestSequence(2, new[] { 1 });
-            TestSequence(3, new[] { 1, 2});
-            TestSequence(4, new[] { 1, 2, 3 });
-            TestSequence(5, new[] { 1, 2, 3 });
-            TestSequence(6, new[] { 1, 2, 3, 5 });
-            TestSequence(7, new[] { 1, 2, 3, 5 });
-
-        }
-
-        private static void TestSequence(int upperBound, IEnumerable<int> expected)
-        {
-            int[] sequence = new FibonacciGenerator().GenerateToLessThan(upperBound);
-            sequence.ShouldAllBeEquivalentTo(expected);
-        }
-
-    }
-
-    public class FibonacciGenerator
-    {
-        public int[] GenerateToLessThan(int upperBound)
-        {
-            var sequence = new List<int>{1, 2};
-            while (upperBound > sequence.Last())
-            {
-                sequence.Add(sequence.Reverse<int>().Take(2).Sum());
-            }
-            return sequence.Where(x => x < upperBound).ToArray();
         }
     }
 }
