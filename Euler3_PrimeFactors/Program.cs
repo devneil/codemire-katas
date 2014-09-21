@@ -23,12 +23,31 @@ namespace Euler3_PrimeFactors
             int[] factors = new Factors().GetPrimeFactorsOf(1);
             factors.Should().BeEmpty();
         }
+
+        [Test]
+        public void TwoReturnsTwo()
+        {
+            int[] factors = new Factors().GetPrimeFactorsOf(2);
+            factors.ShouldAllBeEquivalentTo(new[]{2});
+        }
+
+        [Test]
+        public void ThreeReturnsEmpty()
+        {
+            int[] factors = new Factors().GetPrimeFactorsOf(3);
+            factors.Should().BeEmpty();
+            
+        }
     }
 
     public class Factors
     {
         public int[] GetPrimeFactorsOf(int thisNumber)
         {
+            if (thisNumber%2 == 0)
+            {
+                return new[]{2};
+            }
             return new int[0];
         }
     }
