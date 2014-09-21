@@ -26,6 +26,7 @@ namespace SumOfMultiples
             TestSumMultiples(1, 0);
             TestSumMultiples(2, 0);
             TestSumMultiples(3, 3);
+            TestSumMultiples(4, 3);
         }
 
         private static void TestSumMultiples(int max, int expected)
@@ -40,9 +41,9 @@ namespace SumOfMultiples
     {
         public int UpTo(int max)
         {
-            if (max == 3)
+            if (max >= 3)
             {
-                return max;
+                return 3;
             }
             return 0;
 
