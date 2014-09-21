@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using FluentAssertions;
@@ -17,6 +18,13 @@ namespace SumOfMultiples
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            const int numbersLessThan = 1000;
+
+            int sum = new SumMultiples().UpTo(numbersLessThan);
+
+            Console.WriteLine("The result is: {0}", sum);
+
+            Console.ReadLine();
         }
     }
 
@@ -42,7 +50,7 @@ namespace SumOfMultiples
 
         private static void TestSumMultiples(int lessThan, int expected)
         {
-            int result = new SumMultiples().UpTo(lessThan - 1);
+            int result = new SumMultiples().UpTo(lessThan);
             result.Should().Be(expected);
         }
     }
@@ -52,8 +60,8 @@ namespace SumOfMultiples
         public int UpTo(int max)
         {
             var values = new List<int>();
-            values.AddRange(new GetMultiplesOf(3).UpTo(max));
-            values.AddRange(new GetMultiplesOf(5).UpTo(max));
+            values.AddRange(new GetMultiplesOf(3).UpTo(max-1));
+            values.AddRange(new GetMultiplesOf(5).UpTo(max-1));
             return values.Distinct().Sum();
         }
     }
