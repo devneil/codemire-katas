@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using FluentAssertions;
+using NUnit.Framework;
 
 namespace SumOfMultiples
 {
@@ -20,9 +21,20 @@ namespace SumOfMultiples
     public class SumMultiplesTest
     {
         [Test]
-        public void CanTest()
+        public void OneReturnsZero()
         {
-            
+            int result = new SumMultiples().UpTo(1);
+
+            result.Should().Be(0);
+        }
+    }
+
+    public class SumMultiples
+    {
+        public int UpTo(int max)
+        {
+            return 0;
+
         }
     }
 }
