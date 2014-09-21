@@ -48,20 +48,12 @@ namespace Euler2_EvenFibonacci
     {
         public int[] GenerateToLessThan(int upperBound)
         {
-            var sequence = new List<int>{1};
-            if (upperBound <= 2)
-            {
-                return sequence.ToArray();
-            }
-            if (upperBound > 2)
-            {
-                sequence.Add(2);
-            }
+            var sequence = new List<int>{1, 2};
             if (upperBound > 3)
             {
                 sequence.Add(sequence.Sum());
             }
-            return sequence.ToArray();
+            return sequence.Where(x => x < upperBound).ToArray();
         }
     }
 }
