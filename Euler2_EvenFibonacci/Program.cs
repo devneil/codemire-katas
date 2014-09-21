@@ -26,18 +26,42 @@ namespace Euler2_EvenFibonacci
     public class FibonacciGeneratorTest
     {
         [Test]
-        public void SequenceToThree()
+        public void StateTests()
         {
-            int[] sequence = new FibonacciGenerator().GenerateToLessThan(4);
-            sequence.Should().ContainInOrder(new[] {1, 2, 3});
+            TestSequence(2, new[] { 1 });
+            TestSequence(3, new[] { 1, 2});
+            TestSequence(4, new[] { 1, 2, 3 });
+            TestSequence(5, new[] { 1, 2, 3 });
+            
+
         }
+
+        private static void TestSequence(int upperBound, IEnumerable<int> expected)
+        {
+            int[] sequence = new FibonacciGenerator().GenerateToLessThan(upperBound);
+            sequence.SequenceEqual(expected).Should().BeTrue();
+        }
+
     }
 
     public class FibonacciGenerator
     {
         public int[] GenerateToLessThan(int upperBound)
         {
-            return new[] {1, 2, 3};
+            var sequence = new List<int>{1};
+            if (upperBound <= 2)
+            {
+                return sequence.ToArray();
+            }
+            if (upperBound > 2)
+            {
+                sequence.Add(2);
+            }
+            if (upperBound > 3)
+            {
+                sequence.Add(sequence.Sum());
+            }
+            return sequence.ToArray();
         }
     }
 }

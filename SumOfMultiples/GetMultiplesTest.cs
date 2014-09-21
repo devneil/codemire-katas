@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -20,7 +21,7 @@ namespace SumOfMultiples
         private static void TestMultipliers(int multiplier, int max, IEnumerable<int> expected)
         {
             int[] result = new GetMultiplesOf(multiplier).UpTo(max);
-            result.Should().ContainInOrder(expected);
+            result.SequenceEqual(expected).Should().BeTrue();
         }
 
     }
