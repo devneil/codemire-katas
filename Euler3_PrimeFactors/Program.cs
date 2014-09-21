@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler3_PrimeFactors
@@ -18,10 +19,13 @@ namespace Euler3_PrimeFactors
     public class FactorsTest
     {
         [Test]
-        public void TestsThatReturnEmpty()
+        public void StateTests()
         {
             TestEmpty(1);
-            TestEmpty(3);
+            Test(2, new[] { 2 });
+            Test(3, new[] { 3 });
+            Test(4, new[] { 2, 2 });
+            Test(5, new[] { 5 });
         }
 
         private static void TestEmpty(int thisNumber)
@@ -30,11 +34,10 @@ namespace Euler3_PrimeFactors
             factors.Should().BeEmpty();
         }
 
-        [Test]
-        public void TwoReturnsTwo()
+        private static void Test(int thisNumber, IEnumerable<int> expectation)
         {
-            int[] factors = new Factors().GetPrimeFactorsOf(2);
-            factors.ShouldAllBeEquivalentTo(new[]{2});
+            var factors = new Factors().GetPrimeFactorsOf(thisNumber);
+            factors.ShouldAllBeEquivalentTo(expectation);
         }
 
     }
@@ -43,11 +46,17 @@ namespace Euler3_PrimeFactors
     {
         public int[] GetPrimeFactorsOf(int thisNumber)
         {
-            if (thisNumber%2 == 0)
+            var returnVal = new List<int>();
+            while (thisNumber % 2 == 0)
             {
-                return new[]{2};
+                thisNumber = thisNumber / 2;
+                returnVal.Add(2);
             }
-            return new int[0];
+            if (thisNumber > 1)
+            {
+                returnVal.Add(thisNumber);
+            }
+            return returnVal.ToArray();
         }
     }
 }
