@@ -1,4 +1,6 @@
-﻿using FluentAssertions;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace SumOfMultiples
@@ -47,18 +49,36 @@ namespace SumOfMultiples
 
             result.Should().ContainInOrder(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
         }
+
+        [Test]
+        public void GetMultiplesOfTwoUpToTen()
+        {
+            int[] result = new GetMultiplesOf(2).UpTo(10);
+
+            result.Should().ContainInOrder(new[] {2, 4, 6, 8, 10});
+        }
     }
 
     public class GetMultiplesOf
     {
-        public GetMultiplesOf(int i)
+        private readonly int _multiplier;
+
+        public GetMultiplesOf(int multiplier)
         {
-            
+            _multiplier = multiplier;
         }
 
         public int[] UpTo(int max)
         {
-            return new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+            var returnVal = new List<int>();
+            for (int i = 1; i <= max; i++)
+            {
+                if (i%_multiplier == 0)
+                {
+                    returnVal.Add(i);
+                }
+            }
+            return returnVal.ToArray();
         }
     }
 
