@@ -29,7 +29,7 @@ namespace SumOfMultiples
             TestSumMultiples(2, 0);
             TestSumMultiples(3, 3);
             TestSumMultiples(4, 3);
-            
+            TestSumMultiples(5, 8);
         }
 
         private static void TestSumMultiples(int max, int expected)
@@ -43,7 +43,10 @@ namespace SumOfMultiples
     {
         public int UpTo(int max)
         {
-            return new GetMultiplesOf(3).UpTo(max).Sum();
+            int returnVal = new GetMultiplesOf(3).UpTo(max).Sum();
+            returnVal += new GetMultiplesOf(5).UpTo(max).Sum();
+
+            return returnVal;
         }
     }
 }
