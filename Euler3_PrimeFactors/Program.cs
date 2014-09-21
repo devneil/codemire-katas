@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
@@ -13,6 +14,12 @@ namespace Euler3_PrimeFactors
     {
         static void Main(string[] args)
         {
+            int[] factors = new Factors().GetPrimeFactorsOf(600851475143);
+            int max = factors.Max();
+
+
+            Console.WriteLine("The result is: {0}", max);
+            Console.ReadLine();
         }
     }
 
@@ -71,7 +78,7 @@ namespace Euler3_PrimeFactors
 
     public class Factors
     {
-        public int[] GetPrimeFactorsOf(int thisNumber)
+        public int[] GetPrimeFactorsOf(long thisNumber)
         {
             var returnVal = new List<int>();
 
@@ -85,7 +92,8 @@ namespace Euler3_PrimeFactors
             }
             if (thisNumber > 1)
             {
-                returnVal.Add(thisNumber);
+                // cast to int ok because we know our primes won't be that large
+                returnVal.Add((int)thisNumber);
             }
             return returnVal.ToArray();
         }
