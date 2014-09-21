@@ -45,18 +45,16 @@ namespace SumOfMultiples
         [Test]
         public void GetMultiplesOfOneUpToTen()
         {
-            int[] result = new GetMultiplesOf(1).UpTo(10);
-
-            result.Should().ContainInOrder(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+            TestMultipliers(1, 10, new[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 });
+            TestMultipliers(2, 10, new[] { 2, 4, 6, 8, 10 });
         }
 
-        [Test]
-        public void GetMultiplesOfTwoUpToTen()
+        private static void TestMultipliers(int multiplier, int max, IEnumerable<int> expected)
         {
-            int[] result = new GetMultiplesOf(2).UpTo(10);
-
-            result.Should().ContainInOrder(new[] {2, 4, 6, 8, 10});
+            int[] result = new GetMultiplesOf(multiplier).UpTo(max);
+            result.Should().ContainInOrder(expected);
         }
+
     }
 
     public class GetMultiplesOf
