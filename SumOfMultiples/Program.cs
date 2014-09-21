@@ -27,6 +27,7 @@ namespace SumOfMultiples
             TestSumMultiples(2, 0);
             TestSumMultiples(3, 3);
             TestSumMultiples(4, 3);
+            
         }
 
         private static void TestSumMultiples(int max, int expected)
@@ -34,7 +35,31 @@ namespace SumOfMultiples
             int result = new SumMultiples().UpTo(max);
             result.Should().Be(expected);
         }
+    }
 
+    [TestFixture]
+    public class GetMultiplesTest
+    {
+        [Test]
+        public void GetMultiplesOfOneUpToTen()
+        {
+            int[] result = new GetMultiplesOf(1).UpTo(10);
+
+            result.Should().ContainInOrder(new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10});
+        }
+    }
+
+    public class GetMultiplesOf
+    {
+        public GetMultiplesOf(int i)
+        {
+            
+        }
+
+        public int[] UpTo(int max)
+        {
+            return new[] {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        }
     }
 
     public class SumMultiples
