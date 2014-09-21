@@ -21,12 +21,18 @@ namespace SumOfMultiples
     public class SumMultiplesTest
     {
         [Test]
-        public void OneReturnsZero()
+        public void StateTests()
         {
-            int result = new SumMultiples().UpTo(1);
-
-            result.Should().Be(0);
+            TestSumMultiples(1, 0);
+            TestSumMultiples(2, 0);
         }
+
+        private static void TestSumMultiples(int max, int expected)
+        {
+            int result = new SumMultiples().UpTo(max);
+            result.Should().Be(expected);
+        }
+
     }
 
     public class SumMultiples
