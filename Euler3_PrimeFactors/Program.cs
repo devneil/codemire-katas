@@ -19,13 +19,22 @@ namespace Euler3_PrimeFactors
     public class FactorsTest
     {
         [Test]
-        public void StateTests()
+        public void PrimeFactorStateTests()
         {
             TestEmpty(1);
             Test(2, new[] { 2 });
             Test(3, new[] { 3 });
             Test(4, new[] { 2, 2 });
             Test(5, new[] { 5 });
+            Test(6, new[] { 2, 3});
+            Test(7, new[] { 7 });
+            Test(8, new[] { 2, 2, 2 });
+            Test(9, new[] { 3, 3 });
+            Test(10, new[] { 5, 2 });
+            Test(11, new[] { 11 });
+            Test(12, new[] { 2, 2, 3 });
+            Test(13195, new[] { 5, 7, 13, 29 });
+
         }
 
         private static void TestEmpty(int thisNumber)
@@ -47,10 +56,14 @@ namespace Euler3_PrimeFactors
         public int[] GetPrimeFactorsOf(int thisNumber)
         {
             var returnVal = new List<int>();
-            while (thisNumber % 2 == 0)
+
+            for (int i = 2; i < thisNumber; i++)
             {
-                thisNumber = thisNumber / 2;
-                returnVal.Add(2);
+                while (thisNumber%i == 0)
+                {
+                    thisNumber = thisNumber/i;
+                    returnVal.Add(i);
+                }
             }
             if (thisNumber > 1)
             {
