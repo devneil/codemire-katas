@@ -32,14 +32,15 @@ namespace Euler2_EvenFibonacci
             TestSequence(3, new[] { 1, 2});
             TestSequence(4, new[] { 1, 2, 3 });
             TestSequence(5, new[] { 1, 2, 3 });
-            
+            TestSequence(6, new[] { 1, 2, 3, 5 });
+            TestSequence(7, new[] { 1, 2, 3, 5 });
 
         }
 
         private static void TestSequence(int upperBound, IEnumerable<int> expected)
         {
             int[] sequence = new FibonacciGenerator().GenerateToLessThan(upperBound);
-            sequence.SequenceEqual(expected).Should().BeTrue();
+            sequence.ShouldAllBeEquivalentTo(expected);
         }
 
     }
@@ -49,9 +50,9 @@ namespace Euler2_EvenFibonacci
         public int[] GenerateToLessThan(int upperBound)
         {
             var sequence = new List<int>{1, 2};
-            if (upperBound > 3)
+            while (upperBound > sequence.Last())
             {
-                sequence.Add(sequence.Sum());
+                sequence.Add(sequence.Reverse<int>().Take(2).Sum());
             }
             return sequence.Where(x => x < upperBound).ToArray();
         }
