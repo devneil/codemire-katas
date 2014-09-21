@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
+using NUnit.Framework;
 
 namespace Euler2_EvenFibonacci
 {
@@ -15,6 +18,32 @@ namespace Euler2_EvenFibonacci
     {
         static void Main(string[] args)
         {
+        }
+    }
+
+    [TestFixture]
+    public class EvenFilterTest
+    {
+        [Test]
+        public void OneReturnsEmpty()
+        {
+            int[] sequence = new EvenFilter().GetValues(new[]{1});
+            sequence.Should().BeEmpty();
+        }
+
+        [Test]
+        public void SingleTwoReturnsSingleTwo()
+        {
+            int[] sequence = new EvenFilter().GetValues(new[] {2});
+            sequence.ShouldAllBeEquivalentTo(new [] { 2 });
+        }
+    }
+
+    public class EvenFilter
+    {
+        public int[] GetValues(int[] ints)
+        {
+            return ints.ToList().Where(x => x%2 == 0).ToArray();
         }
     }
 }
