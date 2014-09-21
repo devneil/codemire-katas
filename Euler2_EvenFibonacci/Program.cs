@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Euler2_EvenFibonacci
 {
@@ -20,5 +21,13 @@ namespace Euler2_EvenFibonacci
         }
     }
 
-
+    [TestFixture]
+    public class FibonacciGeneratorTest
+    {
+        [Test]
+        public void CanTest()
+        {
+            
+        }
+    }
 }
