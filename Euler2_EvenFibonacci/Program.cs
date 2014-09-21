@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,17 +26,29 @@ namespace Euler2_EvenFibonacci
     public class EvenFilterTest
     {
         [Test]
-        public void OneReturnsEmpty()
+        public void NoEvensReturnsEmpty()
         {
-            int[] sequence = new EvenFilter().GetValues(new[]{1});
+            TestNoEvens(new[] {1});
+            TestNoEvens(new[] {1, 3, 5, 7, 5, 9, 345});
+        }
+
+        private static void TestNoEvens(int[] ints)
+        {
+            int[] sequence = new EvenFilter().GetValues(ints);
             sequence.Should().BeEmpty();
         }
 
         [Test]
-        public void SingleTwoReturnsSingleTwo()
+        public void WithEvensReturnsEvens()
         {
-            int[] sequence = new EvenFilter().GetValues(new[] {2});
-            sequence.ShouldAllBeEquivalentTo(new [] { 2 });
+            TestWithEvens(new []{2}, new[]{2});
+            TestWithEvens(new[] { 2, 4, 6, 8, 2 }, new[] { 2, 4, 6, 8, 2 });
+        }
+
+        private static void TestWithEvens(int[] ints, IEnumerable<int> expectation)
+        {
+            int[] sequence = new EvenFilter().GetValues(ints);
+            sequence.ShouldAllBeEquivalentTo(expectation);
         }
     }
 
