@@ -18,9 +18,15 @@ namespace Euler3_PrimeFactors
     public class FactorsTest
     {
         [Test]
-        public void OneReturnsEmpty()
+        public void TestsThatReturnEmpty()
         {
-            int[] factors = new Factors().GetPrimeFactorsOf(1);
+            TestEmpty(1);
+            TestEmpty(3);
+        }
+
+        private static void TestEmpty(int thisNumber)
+        {
+            int[] factors = new Factors().GetPrimeFactorsOf(thisNumber);
             factors.Should().BeEmpty();
         }
 
@@ -31,13 +37,6 @@ namespace Euler3_PrimeFactors
             factors.ShouldAllBeEquivalentTo(new[]{2});
         }
 
-        [Test]
-        public void ThreeReturnsEmpty()
-        {
-            int[] factors = new Factors().GetPrimeFactorsOf(3);
-            factors.Should().BeEmpty();
-            
-        }
     }
 
     public class Factors
