@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -35,6 +36,23 @@ namespace Euler3_PrimeFactors
             Test(12, new[] { 2, 2, 3 });
             Test(13195, new[] { 5, 7, 13, 29 });
 
+        }
+
+        [Test]
+        public void MaxPrimeFactorStateTests()
+        {
+            TestMax(2, 2);
+            TestMax(3, 3);
+            TestMax(4, 2);
+            TestMax(13195, 29);
+        }
+
+        private static void TestMax(int thisNumber, int expected)
+        {
+            int[] factors = new Factors().GetPrimeFactorsOf(thisNumber);
+            int max = factors.Max();
+
+            max.Should().Be(expected);
         }
 
         private static void TestEmpty(int thisNumber)
