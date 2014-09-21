@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -19,44 +16,36 @@ namespace Euler2_EvenFibonacci
     {
         static void Main(string[] args)
         {
+            var fibs = new FibonacciGenerator().GenerateToLessThan(4000000);
+            var evens = new EvenFilter().GetValues(fibs);
+            var result = evens.Sum();
+
+            Console.WriteLine("The result is: {0}", result);
+            Console.ReadLine();
         }
     }
 
     [TestFixture]
-    public class EvenFilterTest
+    public class ProgramTest
     {
         [Test]
-        public void NoEvensReturnsEmpty()
+        public void AcceptanceTests()
         {
-            TestNoEvens(new[] {1});
-            TestNoEvens(new[] {1, 3, 5, 7, 5, 9, 345});
+            Test(3, 2); // 1, 2
+            Test(4, 2); // 1, 2, 3
+            Test(5, 2); // 1, 2, 3
+            Test(6, 2); // 1, 2, 3, 5
+            Test(7, 2); // 1, 2, 3, 5
+            Test(8, 2); // 1, 2, 3, 5
+            Test(9, 10); // 1, 2, 3, 5, 8
         }
 
-        private static void TestNoEvens(int[] ints)
+        private static void Test(int upperBound, int expected)
         {
-            int[] sequence = new EvenFilter().GetValues(ints);
-            sequence.Should().BeEmpty();
-        }
-
-        [Test]
-        public void WithEvensReturnsEvens()
-        {
-            TestWithEvens(new []{2}, new[]{2});
-            TestWithEvens(new[] { 2, 4, 6, 8, 2 }, new[] { 2, 4, 6, 8, 2 });
-        }
-
-        private static void TestWithEvens(int[] ints, IEnumerable<int> expectation)
-        {
-            int[] sequence = new EvenFilter().GetValues(ints);
-            sequence.ShouldAllBeEquivalentTo(expectation);
-        }
-    }
-
-    public class EvenFilter
-    {
-        public int[] GetValues(int[] ints)
-        {
-            return ints.ToList().Where(x => x%2 == 0).ToArray();
+            var fibs = new FibonacciGenerator().GenerateToLessThan(upperBound);
+            var evens = new EvenFilter().GetValues(fibs);
+            var result = evens.Sum();
+            result.Should().Be(expected);
         }
     }
 }

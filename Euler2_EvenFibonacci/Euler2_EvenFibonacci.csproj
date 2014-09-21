@@ -50,6 +50,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EvenFilter.cs" />
+    <Compile Include="EvenFilterTest.cs" />
     <Compile Include="FibonacciGenerator.cs" />
     <Compile Include="FibonacciGeneratorTest.cs" />
     <Compile Include="Program.cs" />
