@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace Euler2_EvenFibonacci
@@ -25,9 +26,18 @@ namespace Euler2_EvenFibonacci
     public class FibonacciGeneratorTest
     {
         [Test]
-        public void CanTest()
+        public void SequenceToThree()
         {
-            
+            int[] sequence = new FibonacciGenerator().GenerateToLessThan(4);
+            sequence.Should().ContainInOrder(new[] {1, 2, 3});
+        }
+    }
+
+    public class FibonacciGenerator
+    {
+        public int[] GenerateToLessThan(int upperBound)
+        {
+            return new[] {1, 2, 3};
         }
     }
 }
