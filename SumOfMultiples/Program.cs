@@ -74,12 +74,17 @@ namespace SumOfMultiples
             var returnVal = new List<int>();
             for (int i = 1; i <= max; i++)
             {
-                if (i%_multiplier == 0)
+                if (IsDivisibleBy(i, _multiplier))
                 {
                     returnVal.Add(i);
                 }
             }
             return returnVal.ToArray();
+        }
+
+        private static bool IsDivisibleBy(int dividend, int divisor)
+        {
+            return dividend%divisor == 0;
         }
     }
 
