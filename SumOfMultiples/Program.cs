@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using FluentAssertions;
 using NUnit.Framework;
@@ -35,6 +36,8 @@ namespace SumOfMultiples
             TestSumMultiples(8, 14);
             TestSumMultiples(9, 14);
             TestSumMultiples(10, 23);
+            TestSumMultiples(15, 45);
+            TestSumMultiples(16, 60);
         }
 
         private static void TestSumMultiples(int lessThan, int expected)
@@ -48,10 +51,10 @@ namespace SumOfMultiples
     {
         public int UpTo(int max)
         {
-            int returnVal = new GetMultiplesOf(3).UpTo(max).Sum();
-            returnVal += new GetMultiplesOf(5).UpTo(max).Sum();
-
-            return returnVal;
+            var values = new List<int>();
+            values.AddRange(new GetMultiplesOf(3).UpTo(max));
+            values.AddRange(new GetMultiplesOf(5).UpTo(max));
+            return values.Distinct().Sum();
         }
     }
 }
