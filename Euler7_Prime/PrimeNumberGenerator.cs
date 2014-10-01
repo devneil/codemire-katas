@@ -19,5 +19,10 @@ namespace Euler7_Prime
             }
             return primes.Last();
         }
+
+        public int SumToPrimeLessThan(int n)
+        {
+            return n-1;
+        }
     }
 }

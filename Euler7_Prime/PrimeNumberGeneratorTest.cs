@@ -6,8 +6,21 @@ namespace Euler7_Prime
     [TestFixture]
     public class PrimeNumberGeneratorTest
     {
+        private static PrimeNumberGenerator _gen;
+        [SetUp]
+        public void Setup()
+        {
+            _gen = new PrimeNumberGenerator();
+        }
         [Test]
-        public void IncrementalTests()
+        public void SumTest()
+        {
+            TestSumToLessThan(1, 0);
+            TestSumToLessThan(4, 3);
+        }
+
+        [Test]
+        public void IncrementalNthTests()
         {
             TestNthPrime(1, 2);
             TestNthPrime(2, 3);
@@ -19,7 +32,14 @@ namespace Euler7_Prime
 
         private static void TestNthPrime(int nth, int expected)
         {
-            int result = new PrimeNumberGenerator().GetNthPrime(nth);
+            int result = _gen.GetNthPrime(nth);
+            result.Should().Be(expected);
+        }
+
+        private static void TestSumToLessThan(int i, int expected)
+        {
+
+            int result = _gen.SumToPrimeLessThan(i);
             result.Should().Be(expected);
         }
     }
