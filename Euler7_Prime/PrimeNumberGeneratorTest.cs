@@ -12,11 +12,14 @@ namespace Euler7_Prime
         {
             _gen = new PrimeNumberGenerator();
         }
+
         [Test]
         public void SumTest()
         {
             TestSumToLessThan(1, 0);
-            TestSumToLessThan(4, 3);
+            TestSumToLessThan(4, 3); // 3 only
+            TestSumToLessThan(6, 8); // 5 + 3
+
         }
 
         [Test]
@@ -38,7 +41,6 @@ namespace Euler7_Prime
 
         private static void TestSumToLessThan(int i, int expected)
         {
-
             int result = _gen.SumToPrimeLessThan(i);
             result.Should().Be(expected);
         }
