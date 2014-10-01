@@ -6,7 +6,7 @@ namespace Euler7_Prime
     {
         static void Main(string[] args)
         {
-            // Euler7();
+            //Euler7();
 
             Euler10();
         }
@@ -17,7 +17,11 @@ namespace Euler7_Prime
         /// </summary>
         private static void Euler10()
         {
-            
+            const int twoMillion = 2000000;
+            var result = new PrimeNumberGenerator().SumToPrimeLessThan(twoMillion);
+
+            Console.WriteLine("The result is: {0}", result);
+            Console.ReadLine();
         }
 
 
@@ -27,7 +31,7 @@ namespace Euler7_Prime
         /// </summary>
         static void Euler7()
         {
-            int result = new PrimeNumberGenerator().GetNthPrime(10001);
+            var result = new PrimeNumberGenerator().GetNthPrime(10001);
 
             Console.WriteLine("The result is: {0}", result);
             Console.ReadLine();

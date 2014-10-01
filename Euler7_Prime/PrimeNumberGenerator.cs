@@ -5,9 +5,9 @@ namespace Euler7_Prime
 {
     public class PrimeNumberGenerator
     {
-        public int GetNthPrime(int nth)
+        public long GetNthPrime(int nth)
         {
-            var primes = new List<int>();
+            var primes = new List<long>();
             var i = 1;
             while (primes.Count < nth)
             {
@@ -16,24 +16,24 @@ namespace Euler7_Prime
             return primes.Last();
         }
 
-        private static void AddIfPrime(ICollection<int> primes, int i)
+        public long SumToPrimeLessThan(int n)
         {
-            if (primes.All(x => i%x != 0))
-            {
-                primes.Add(i);
-            }
-        }
-
-        public int SumToPrimeLessThan(int n)
-        {
-            var primes = new List<int>();
-            var i = 3;
+            var primes = new List<long>();
+            var i = 2;
             while (i < n)
             {
                 AddIfPrime(primes, i);
-                i += 2; // only odds can be prime
+                i++;
             }
             return primes.Sum();
+        }
+
+        private static void AddIfPrime(ICollection<long> primes, int i)
+        {
+            if (primes.All(x => i % x != 0))
+            {
+                primes.Add(i);
+            }
         }
     }
 }
