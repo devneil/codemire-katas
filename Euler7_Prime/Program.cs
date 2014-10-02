@@ -14,6 +14,8 @@ namespace Euler7_Prime
         /// <summary>
         /// The sum of the primes below 10 is 2 + 3 + 5 + 7 = 17.
         /// Find the sum of all the primes below two million.
+        /// 
+        /// TODO Optimisation Candidate
         /// </summary>
         private static void Euler10()
         {
