@@ -33,6 +33,7 @@ namespace Euler11_ProductInGrid
     {
         static void Main(string[] args)
         {
+
         }
     }
 
